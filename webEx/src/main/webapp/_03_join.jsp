@@ -111,8 +111,8 @@
             <span>성별</span>
             <select name="nes">
                 <option value="">성별</option>
-                <option value="M">남자</option>
-                <option value="W">여자</option>
+                <option value="MAN">남자</option>
+                <option value="WOMAN">여자</option>
                 <option value="none">선택안함</option>
             </select>
             <span class="alert" id="n6">필수 정보입니다</span>
