@@ -64,7 +64,7 @@
         
 	</style>
 	<script type="text/javascript" src="_02_validation.js"></script>
-	<title>Insert title here</title>
+	<title>login</title>
 </head>
 <body>
 	<%

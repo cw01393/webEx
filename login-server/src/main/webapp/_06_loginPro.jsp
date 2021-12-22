@@ -54,7 +54,7 @@
         }
         
 	</style>
-<title>Insert title here</title>
+<title>login</title>
 </head>
 <body>
 	<h1>NAVER</h1>
