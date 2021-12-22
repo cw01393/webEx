@@ -113,19 +113,11 @@ public class UserDAO {
 	
 	public int login(String id, String pw) {
 		try {
-			conn = getConnection();
 			users = getUsers();
-			String sql = "select * from users";
-			pstmt = conn.prepareStatement(sql);
-			rs = pstmt.executeQuery();
 			
-			while(rs.next()) {
-				int code = rs.getInt(1);
-				String registedId = rs.getString(2);
-				String registedPw = rs.getString(3);
-				
-				if(id.equals(registedId) && pw.equals(registedPw)) {
-					return code;
+			for(UserDTO user : users) {
+				if(id.equals(user.getId()) && pw.equals(user.getPw())) {
+					return user.getCode();
 				}
 			}
 			
