@@ -40,6 +40,16 @@
         	font-weight:bold;
         	font-size:1.2em;
         }
+        input{
+        	height: 50px;
+            width: 150px;
+            background-color: rgb(38, 192, 38);
+            color: white;
+            font-size: 1em;
+            border: none;
+            cursor: pointer;
+        }
+        
     </style>
     <title>join</title>
 </head>
@@ -67,7 +77,13 @@
 	    	<h2>회원가입이 완료되었습니다!</h2>
 	    	<h3><%=last.toString() %></h3>
 			
-		<%} %>
+		<%} 
+		else{ %>
+			<h2>아이디 중복, 회원가입이 처리되지 않았습니다</h2>
+		<% }%>
+		<form method="post" action="_05_login.jsp">
+				<input type="submit" value="로그인하기">
+		</form>
     </div>
     
 </body>
