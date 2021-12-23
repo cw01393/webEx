@@ -120,7 +120,6 @@ public class UserDAO {
 					return user.getCode();
 				}
 			}
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
