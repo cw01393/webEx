@@ -20,6 +20,7 @@
             flex-direction: column;
 
             align-items: center;
+            
         }
         h1{
             font-size: 3em;
@@ -34,6 +35,7 @@
         div.info{
         	display: flex;
         	flex-direction: column;
+        	align-items: center;
         	gap: 10px;
         }
         p.title{
@@ -62,24 +64,30 @@
 	    
 	    String id = values[0];
 	    String pw = values[1];
+	    String pwcheck = values[2];
 	    
-    	UserDAO dao = UserDAO.getInstance();
-		
-		UserDTO user = new UserDTO(id, pw);
-		// 회원가입 처리
-		
-		if(!dao.checkDup(user)){
-			dao.addUser(user);
-		
-			ArrayList<UserDTO> users = dao.getUsers();
-			UserDTO last = users.get(users.size()-1);
-	    	%>
-	    	<h2>회원가입이 완료되었습니다!</h2>
-	    	<h3><%=last.toString() %></h3>
+	    if(pw.equals(pwcheck)){
+	    	UserDAO dao = UserDAO.getInstance();
 			
-		<%} 
-		else{ %>
-			<h2>아이디 중복, 회원가입이 처리되지 않았습니다</h2>
+			UserDTO user = new UserDTO(id, pw);
+			// 회원가입 처리
+			
+			if(!dao.checkDup(user)){
+				dao.addUser(user);
+			
+				ArrayList<UserDTO> users = dao.getUsers();
+				UserDTO last = users.get(users.size()-1);
+		    	%>
+		    	<h2>회원가입이 완료되었습니다!</h2>
+		    	<h3><%=last.toString() %></h3>
+				
+			<%} 
+			else{ %>
+				<h2>아이디 중복, 회원가입이 처리되지 않았습니다</h2>
+			<% }
+	    }
+	    else{%>
+			<h2>비밀번호 불일치, 회원가입이 처리되지 않았습니다</h2>
 		<% }%>
 		<form method="post" action="_05_login.jsp">
 				<input type="submit" value="로그인하기">
