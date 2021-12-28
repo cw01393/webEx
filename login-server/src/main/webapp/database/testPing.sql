@@ -1,6 +1,8 @@
 select * from users;
 
-create schema loginServer;
+create database loginServer;
+
+use loginServer;
 create table users(
 	code integer primary key auto_increment,
 	id varchar(30) not null,
