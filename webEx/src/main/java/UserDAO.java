@@ -1,4 +1,4 @@
-package user;
+
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,8 +7,6 @@ import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
-
-import util.DBManager;
 
 public class UserDAO {
 	// Data Access Object
@@ -29,30 +27,30 @@ public class UserDAO {
 	private ArrayList<UserDTO> users = null;
 
 	// 3. DB연동하기
-//	public Connection getConnection() {
-//		try {
-//			Class.forName("com.mysql.cj.jdbc.Driver");
-//			
-//			String url = "jdbc:mysql://localhost:3306/loginServer?Timezone=UTC";
-//			String user = "root";
-//			String password = "dr3047";
-//			conn = DriverManager.getConnection(url, user, password);
-//			
-//			if(conn != null)
-//				System.out.println("연동성공");
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		
-//		return conn;
-//	}
+	public Connection getConnection() {
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			
+			String url = "jdbc:mysql://localhost:3306/loginServer?Timezone=UTC";
+			String user = "root";
+			String password = "dr3047";
+			conn = DriverManager.getConnection(url, user, password);
+			
+			if(conn != null)
+				System.out.println("연동성공");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return conn;
+	}
 	
 	// 4. 연동된 Db에서 데이터 불러오기
 	public ArrayList<UserDTO> getUsers(){
 		this.users = new ArrayList<UserDTO>();
 		
 		try {
-			conn = DBManager.getConnection();				// DB연동하기
+			conn = getConnection();				// DB연동하기
 			String sql = "select * from users";
 			pstmt = conn.prepareStatement(sql);	// 연동된 DB에 쿼리를 날릴 준비
 			rs = pstmt.executeQuery();			// 쿼리를 날리면서 resultSet을 받음
@@ -77,10 +75,10 @@ public class UserDAO {
 	// 5. CRUD
 	// ㄴ Create Read Update Delete
 	
-	public void addUser(UserDTO user) {
+	public boolean addUser(UserDTO user) {
 		if(!checkDup(user)) {
 			try {
-				conn = DBManager.getConnection();
+				conn = getConnection();
 				String sql = "insert into users(id, pw, regDate) values(?, ?, ?)"; // ?는 sql 쿼리의 포맷
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, user.getId());
@@ -88,10 +86,13 @@ public class UserDAO {
 				pstmt.setTimestamp(3, new Timestamp(Calendar.getInstance().getTimeInMillis()));
 				
 				pstmt.executeUpdate();
+				System.out.println("추가되었습니다");
+				return true;
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
+		return false;
 	}
 	
 	public boolean checkDup(UserDTO user) {

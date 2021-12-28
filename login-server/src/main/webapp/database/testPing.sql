@@ -17,3 +17,14 @@ insert users(id, pw) values('water','6666');
 insert users(id, pw) values('mandarin','7777');
 insert users(id, pw) values('potato','8888');
 insert users(id, pw) values('sweet','9999');
+
+create table board(
+	code integer primary key auto_increment,
+    title varchar(200) not null,
+    content varchar(5000) not null,
+    id varchar(20) not null,
+    pw varchar(20) not null,
+    view integer default 0,
+    `like` integer default 0,
+    date datetime not null
+);

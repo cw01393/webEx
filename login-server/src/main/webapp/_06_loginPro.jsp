@@ -52,6 +52,10 @@
             border: none;
             cursor: pointer;
         }
+        form{
+        	display: flex;
+        	gap : 10px;
+        }
         
 	</style>
 <title>login</title>
@@ -68,10 +72,11 @@
 		
 		int log = dao.login(id, pw);
 		if(log != -1){
-			session.setAttribute("log", log); %>
+			session.setAttribute("log", id); %>
 			<h3><%=id %>님 로그인 되었습니다</h3>
-			<form method="post" action="_05_login.jsp">
-				<input type="submit" value="로그아웃">
+			<form method="post" action="_10_boardList.jsp">
+				<input type="button" value="로그아웃" onclick="location.href='_05_login.jsp'">
+				<input type="submit" value="게시판바로가기">
 			</form>
 		<%		
 		}

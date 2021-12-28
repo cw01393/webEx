@@ -45,3 +45,16 @@ function checkLogin(form){
 		form.submit();
 	}
 }
+
+function checkContent(form){
+	const title = form.title.value;
+	const content = form.content.value;
+	const pw = form.pw.value;
+	
+	if(title !== "" && content !== "" && pw !== ""){
+		form.submit();
+	}
+	else{
+		alert("모든 필드를 채워주세요");
+	}
+}
