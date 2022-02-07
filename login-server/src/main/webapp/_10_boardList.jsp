@@ -81,7 +81,9 @@
         <h1>BOARD</h1>
         <p>
             <button onclick="location.href='_00_main.jsp'">HOME</button>
+            <%if(session.getAttribute("log") != null){%>
             <button id="write" onclick="location.href='_11_boardWriteForm.jsp'">Write</button>
+            <%} %>
         </p>
         <table border="solid 1px" style="border-collapse: collapse;">
             <tr class="head"> 
@@ -96,7 +98,8 @@
             BoardDAO dao = BoardDAO.getInstance();
             ArrayList<BoardDTO> list = dao.getBoard();
             
-            for(BoardDTO e : list){
+            for(int i=list.size()-1; i>=0; i--){
+            	BoardDTO e = list.get(i);
             	int code = e.getCode();
             	String title = e.getTitle();
             	String id = e.getId();
